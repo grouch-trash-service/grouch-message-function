@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  grouch-message-function
+
+  Sample SAM Template for grouch-message-function
+
+Resources:
+  GetMessageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GrouchMessageFunction
+      Handler: index.handler
+      Runtime: python3.7
+      CodeUri: ./lambda
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /v1/message
+            Method: get
+            RestApiId: !Ref GrouchApiGateway
+
+Outputs:
+  GrouchMessageFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt GrouchMessageFunction.Arn
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}-GrouchMessageFunction
+  GrouchMessageFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt GrouchMessageFunction.Arn
