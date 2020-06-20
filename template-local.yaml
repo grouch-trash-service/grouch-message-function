@@ -15,14 +15,9 @@ Resources:
       CodeUri: .
       Timeout: 30
       MemorySize: 1512
-
-Outputs:
-  GrouchMessageFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt GrouchMessageFunction.Arn
-    Export:
-      Name:
-        Fn::Sub: ${AWS::StackName}-GrouchMessageFunction
-  GrouchMessageFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt GrouchMessageFunction.Arn
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /v1/message
+            Method: get
