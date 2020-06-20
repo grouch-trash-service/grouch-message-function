@@ -14,14 +14,19 @@ public class MessageController {
 
     @GetMapping(path = "/message")
     public Message getMessage() {
-        return new Message("Hello. Trash pickup will be on Tuesday... Now SCRAM!");
+        return new Message(
+                "Hello. Trash pickup will be on Tuesday... Now SCRAM!");
     }
 
     private class Message {
-        public final String text;
+        private final String text;
 
-        public Message(String text) {
+        Message(final String text) {
             this.text = text;
+        }
+
+        public String getText() {
+            return text;
         }
     }
 

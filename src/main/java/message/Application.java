@@ -16,7 +16,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 public class Application {
 
     /*
-     * Create required HandlerMapping, to avoid several default HandlerMapping instances being created
+     * Create required HandlerMapping,
+     * to avoid several default HandlerMapping instances being created
      */
     @Bean
     public HandlerMapping handlerMapping() {
@@ -24,14 +25,15 @@ public class Application {
     }
 
     /*
-     * Create required HandlerAdapter, to avoid several default HandlerAdapter instances being created
+     * Create required HandlerAdapter,
+     *  to avoid several default HandlerAdapter instances being created
      */
     @Bean
     public HandlerAdapter handlerAdapter() {
         return new RequestMappingHandlerAdapter();
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
     }
 }
