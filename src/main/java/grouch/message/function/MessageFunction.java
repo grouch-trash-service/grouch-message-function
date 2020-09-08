@@ -9,6 +9,7 @@ import org.openapitools.model.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import java.util.Collections;
@@ -32,7 +33,7 @@ public class MessageFunction implements Function<APIGatewayProxyRequestEvent, AP
         Message message = messageProvider.getMessage();
         String body = bodyAsString(message);
         return new APIGatewayProxyResponseEvent().withBody(body)
-                .withHeaders(Collections.singletonMap("Content-Type", MediaType.APPLICATION_JSON_VALUE));
+                .withHeaders(Collections.singletonMap(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
     }
 
     protected String bodyAsString(final Object object) {

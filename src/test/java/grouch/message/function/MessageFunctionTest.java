@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openapitools.model.Message;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 import java.io.IOException;
 
@@ -44,6 +46,9 @@ public class MessageFunctionTest {
         doReturn(expectedMessage).when(messageProvider).getMessage();
 
         APIGatewayProxyResponseEvent apiGatewayProxyResponseEvent = messageFunction.apply(apiGatewayProxyRequestEvent);
+
+        assertEquals(MediaType.APPLICATION_JSON_VALUE,
+                apiGatewayProxyResponseEvent.getHeaders().get(HttpHeaders.CONTENT_TYPE));
 
         Message message = actualMessage(apiGatewayProxyResponseEvent);
         assertEquals(expectedMessage, message);
