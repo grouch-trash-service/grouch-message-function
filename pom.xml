@@ -26,6 +26,9 @@
 		<wrapper.version>1.0.17.RELEASE</wrapper.version>
 		<aws-lambda-events.version>2.0.2</aws-lambda-events.version>
 		<spring-cloud-function.version>3.0.9.RELEASE</spring-cloud-function.version>
+		<sonar.projectKey>grouch-trash-service_grouch-message-function</sonar.projectKey>
+		<sonar.organization>grouch-trash-service</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<dependencies>
@@ -38,7 +41,6 @@
 			<artifactId>aws-lambda-java-events</artifactId>
 			<version>${aws-lambda-events.version}</version>
 			<scope>provided</scope>
-			<!-- 			<scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
