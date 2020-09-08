@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    function:
+      scan:
+        packages: grouch.message
+logging:
+  level:
+    org:
+      springframework: ERROR

@@ -10,11 +10,14 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: GrouchMessageFunction
-      Handler: message.StreamLambdaHandler::handleRequest
+      Handler: grouch.message.FunctionHandler
       Runtime: java11
       CodeUri: .
       Timeout: 30
       MemorySize: 1512
+      Environment:
+        Variables:
+          FUNCTION_NAME: MessageFunction
 
 Outputs:
   GrouchMessageFunction:
