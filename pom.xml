@@ -56,6 +56,11 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>net.mporter</groupId>
+			<artifactId>grouch-api-gateway</artifactId>
+			<version>1.0.38</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
