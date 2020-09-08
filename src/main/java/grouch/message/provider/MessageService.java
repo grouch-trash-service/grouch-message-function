@@ -1,4 +1,4 @@
-package grouch.message;
+package grouch.message.provider;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.openapitools.model.Message;

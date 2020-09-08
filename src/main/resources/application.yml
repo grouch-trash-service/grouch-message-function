@@ -2,7 +2,7 @@ spring:
   cloud:
     function:
       scan:
-        packages: grouch.message
+        packages: grouch.message.function
 logging:
   level:
     org:

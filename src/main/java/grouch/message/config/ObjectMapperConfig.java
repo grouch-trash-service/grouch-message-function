@@ -1,4 +1,4 @@
-package grouch.message;
+package grouch.message.config;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Bean;
