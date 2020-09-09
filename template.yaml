@@ -10,7 +10,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: GrouchMessageFunction
-      Handler: grouch.message.FunctionHandler
+      Handler: grouch.message.function.FunctionHandler
       Runtime: java11
       CodeUri: .
       Timeout: 30
