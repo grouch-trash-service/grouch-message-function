@@ -45,6 +45,7 @@ jobs:
       uses: snyk/actions/maven@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        JAVA_HOME: ""
 
     - name: Deploy Sam templates
       run: sam build && sam deploy --no-fail-on-empty-changeset
