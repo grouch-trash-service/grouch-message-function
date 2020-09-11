@@ -17,8 +17,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -28,9 +26,10 @@ jobs:
         aws-region: us-east-1
 
     - name: Build with Maven
-      run: ./mvnw -s settings.xml clean package
+      run: ./mvnw -s ./settings.xml clean package
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_ACTOR: ${{ github.actor }}
 
     - name: Deploy Sam templates
       run: sam build && sam deploy --no-fail-on-empty-changeset
