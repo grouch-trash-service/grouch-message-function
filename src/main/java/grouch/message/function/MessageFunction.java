@@ -6,10 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import grouch.message.model.Message;
 import grouch.message.provider.MessageProvider;
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,12 +14,11 @@ import org.springframework.http.MediaType;
 import java.util.Collections;
 import java.util.function.Function;
 
-
+@Slf4j
 public class MessageFunction implements Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private final MessageProvider messageProvider;
     private final ObjectMapper objectMapper;
-    private final Logger log = LoggerFactory.getLogger(MessageFunction.class);
 
     @Autowired
     public MessageFunction(final MessageProvider messageProvider, final ObjectMapper objectMapper) {
