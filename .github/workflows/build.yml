@@ -45,7 +45,7 @@ jobs:
       uses: snyk/actions/maven@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        JAVA_HOME: ""
+        JAVA_HOME: /usr/java/openjdk-14
 
     - name: Deploy Sam templates
       run: sam build && sam deploy --no-fail-on-empty-changeset
