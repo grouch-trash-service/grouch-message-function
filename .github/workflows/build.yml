@@ -25,9 +25,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Configure Maven
-      run: mkdir ~/.m2 && cp settings.xml ~/.m2/settings.xml
-
     - name: Build with Maven
       run: ./mvnw clean package
       env:
