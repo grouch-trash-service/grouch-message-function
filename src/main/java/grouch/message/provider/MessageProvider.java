@@ -1,6 +1,6 @@
 package grouch.message.provider;
 
-import org.openapitools.model.Message;
+import grouch.message.model.Message;
 
 public interface MessageProvider {
     Message getMessage();

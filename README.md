@@ -1,9 +1,10 @@
 # grouch-message-function
 A Serverless Function for retrieving a grouchy message about when trash pick is.
 
-Before running the build make sure you have the necessary tools installed by running
+## Build
+To build the project run the following command
 ```bash
-./init
+./mvnw clean package
 ```
 
 ## Sonar

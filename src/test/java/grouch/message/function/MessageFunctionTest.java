@@ -4,6 +4,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import grouch.message.model.Message;
 import grouch.message.provider.MessageProvider;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.openapitools.model.Message;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
@@ -86,7 +86,7 @@ public class MessageFunctionTest {
 
     private Message expectedMessage() {
         String text = "Trash Pickup is on Tuesday...Now Scram!";
-        return new Message().text(text);
+        return new Message(text);
     }
 
     private Message actualMessage(APIGatewayProxyResponseEvent apiGatewayProxyResponseEvent) throws IOException {
