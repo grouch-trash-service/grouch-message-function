@@ -28,7 +28,7 @@ jobs:
         aws-region: us-east-1
 
     - name: Build with Maven
-      run: ./mvnw -s $GITHUB_WORKSPACE/settings.xml -B package --file pom.xml
+      run: ./mvnw -s settings.xml clean package
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
