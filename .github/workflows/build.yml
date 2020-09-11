@@ -28,7 +28,7 @@ jobs:
         aws-region: us-east-1
 
     - name: Build with Maven
-      run: ./mvnw clean install
+      run: ./mvnw -B package --file pom.xml
 
     - name: Deploy Sam templates
       run: sam build && sam deploy --no-fail-on-empty-changeset
