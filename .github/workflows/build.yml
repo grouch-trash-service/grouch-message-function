@@ -28,7 +28,7 @@ jobs:
         aws-region: us-east-1
 
     - name: Configure Maven
-      run: cp settings.xml ~/.m2/settings.xml
+      run: mkdir ~/.m2 && cp settings.xml ~/.m2/settings.xml
 
     - name: Build with Maven
       run: ./mvnw clean package
