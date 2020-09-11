@@ -26,10 +26,10 @@ jobs:
         aws-region: us-east-1
 
     - name: Build with Maven
-      run: ./mvnw -s ./settings.xml clean package
+      run: ./mvnw -s ./settings.xml clean package && sam build
       env:
         GITHUB_TOKEN: ${{ github.token }}
         GITHUB_ACTOR: ${{ github.actor }}
 
     - name: Deploy Sam templates
-      run: sam build && sam deploy --no-fail-on-empty-changeset
+      run: sam deploy --no-fail-on-empty-changeset
