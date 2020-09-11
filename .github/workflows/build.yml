@@ -41,5 +41,10 @@ jobs:
         status=$(echo $status | jq '.projectStatus.status')
         test '"OK"' = $status
 
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/maven@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
     - name: Deploy Sam templates
       run: sam build && sam deploy --no-fail-on-empty-changeset
