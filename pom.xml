@@ -26,6 +26,7 @@
 		<wrapper.version>1.0.17.RELEASE</wrapper.version>
 		<aws-lambda-events.version>2.0.2</aws-lambda-events.version>
 		<spring-cloud-function.version>3.0.9.RELEASE</spring-cloud-function.version>
+		<cucumber.version>4.3.1</cucumber.version>
 		<sonar.projectKey>grouch-trash-service_grouch-message-function</sonar.projectKey>
 		<sonar.organization>grouch-trash-service</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -54,6 +55,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.859</version>
+		</dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.12</version>
@@ -72,6 +78,30 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-spring</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-core</artifactId>
+			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
