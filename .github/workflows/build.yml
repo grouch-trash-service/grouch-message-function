@@ -28,6 +28,16 @@ jobs:
     - name: Build with Maven
       run: ./mvnw clean package
 
+    - name: Sam Build
+      run: sam build
+
+    - name: Run local Cucumber tests
+      run: |
+        sam local start-lambda &
+        sam_pid=$!
+        sleep 10
+        ./mvnw -P cucumber verify
+
     - name: SonarCloud Scan
       run: ./mvnw -Dsonar.login=${SONAR_TOKEN} verify sonar:sonar
       env:
@@ -47,5 +57,8 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         JAVA_HOME: /usr/java/openjdk-14
 
-    - name: Deploy Sam templates
-      run: sam build && sam deploy --no-fail-on-empty-changeset
+    - name: Deploy to AWS
+      run: sam deploy --no-fail-on-empty-changeset
+
+    - name: Run Cucumber Tests
+      run: ./mvnw -P cucumber verify -Dspring.profiles.active=prod
