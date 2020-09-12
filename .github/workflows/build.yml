@@ -37,6 +37,7 @@ jobs:
         sam_pid=$!
         sleep 10
         ./mvnw -P cucumber verify
+        kill $sam_pid
 
     - name: SonarCloud Scan
       run: ./mvnw -Dsonar.login=${SONAR_TOKEN} verify sonar:sonar
