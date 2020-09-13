@@ -50,6 +50,8 @@ public class MessageFunctionTest {
         assertEquals(MediaType.APPLICATION_JSON_VALUE,
                 apiGatewayProxyResponseEvent.getHeaders().get(HttpHeaders.CONTENT_TYPE));
 
+        assertEquals("*", apiGatewayProxyResponseEvent.getHeaders().get(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN));
+
         Message message = actualMessage(apiGatewayProxyResponseEvent);
         assertEquals(expectedMessage, message);
     }

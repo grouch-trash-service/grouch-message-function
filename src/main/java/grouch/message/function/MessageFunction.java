@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class MessageFunction implements MessageLambdaFunction {
@@ -30,7 +30,7 @@ public class MessageFunction implements MessageLambdaFunction {
         Message message = messageProvider.getMessage();
         String body = bodyAsString(message);
         return new APIGatewayProxyResponseEvent().withBody(body)
-                .withHeaders(Collections.singletonMap(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
+                .withHeaders(getHeaders());
     }
 
     protected String bodyAsString(final Object object) {
@@ -40,5 +40,12 @@ public class MessageFunction implements MessageLambdaFunction {
             log.error("Error converting body to json", e);
             return e.getMessage();
         }
+    }
+
+    private Map<String, String> getHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        headers.put(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        return headers;
     }
 }
