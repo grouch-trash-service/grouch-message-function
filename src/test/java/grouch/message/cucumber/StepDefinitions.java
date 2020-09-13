@@ -32,7 +32,7 @@ public class StepDefinitions extends SpringCucumberContext {
                 messageLambdaFunction.apply(apiGatewayProxyRequestEvent);
     }
 
-    @Then("a valid message about when trash pickup is returned")
+    @Then("a grouchy message about when trash pickup is returned")
     public void validateMessage() throws JsonProcessingException {
         Message message = new ObjectMapper().readValue(apiGatewayProxyResponseEvent.getBody(), Message.class);
         assertTrue(message.getText().contains("Trash"));
