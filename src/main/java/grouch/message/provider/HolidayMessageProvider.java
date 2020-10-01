@@ -1,5 +1,6 @@
 package grouch.message.provider;
 
+import grouch.message.model.HolidayTrashSchedule;
 import grouch.message.model.Message;
 import lombok.RequiredArgsConstructor;
 

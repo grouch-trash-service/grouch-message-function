@@ -1,4 +1,4 @@
-package grouch.message.function;
+package grouch.message.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

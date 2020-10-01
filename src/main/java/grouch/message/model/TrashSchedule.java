@@ -1,4 +1,4 @@
-package grouch.message.provider;
+package grouch.message.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;

@@ -1,6 +1,7 @@
 package grouch.message.provider;
 
 import grouch.message.model.Message;
+import grouch.message.model.TrashSchedule;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 

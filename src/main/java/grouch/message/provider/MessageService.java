@@ -1,8 +1,9 @@
 package grouch.message.provider;
 
 import grouch.message.function.TrashFunction;
-import grouch.message.function.TrashFunctionEvent;
+import grouch.message.model.TrashFunctionEvent;
 import grouch.message.model.Message;
+import grouch.message.model.TrashSchedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
