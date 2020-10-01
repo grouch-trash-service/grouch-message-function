@@ -18,6 +18,12 @@ Resources:
       Environment:
         Variables:
           FUNCTION_NAME: MessageFunction
+      Policies:
+        - Statement:
+            - Sid: LambdaInvokePolicy
+              Effect: Allow
+              Action: lambda:InvokeFunction
+              Resource: "*"
 
 Outputs:
   GrouchMessageFunction:

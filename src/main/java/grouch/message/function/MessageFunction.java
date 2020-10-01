@@ -27,8 +27,10 @@ public class MessageFunction implements MessageLambdaFunction {
 
     @Override
     public APIGatewayProxyResponseEvent apply(final APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
+        log.info("Starting get message");
         Message message = messageProvider.getMessage();
         String body = bodyAsString(message);
+        log.info("Got message. message={}", body);
         return new APIGatewayProxyResponseEvent().withBody(body)
                 .withHeaders(getHeaders());
     }
