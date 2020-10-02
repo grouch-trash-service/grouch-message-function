@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Message {
-    @JsonProperty("text")
-    private String text;
+public class Error {
+    @JsonProperty("message")
+    private String message;
 }

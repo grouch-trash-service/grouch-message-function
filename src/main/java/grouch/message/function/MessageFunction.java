@@ -4,11 +4,13 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import grouch.message.model.Error;
 import grouch.message.model.Message;
 import grouch.message.provider.MessageProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +30,32 @@ public class MessageFunction implements MessageLambdaFunction {
     @Override
     public APIGatewayProxyResponseEvent apply(final APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
         log.info("Starting get message");
+        APIGatewayProxyResponseEvent apiGatewayProxyResponseEvent;
+        try {
+            apiGatewayProxyResponseEvent = getMessage();
+        } catch (Exception e) {
+            apiGatewayProxyResponseEvent = getError(e);
+        }
+        log.info("Completed get message. body={}, status={}", apiGatewayProxyResponseEvent.getBody(),
+                apiGatewayProxyResponseEvent.getStatusCode());
+
+        return apiGatewayProxyResponseEvent;
+    }
+
+    private APIGatewayProxyResponseEvent getError(final Throwable exception) {
+        log.error("Error occurred.", exception);
+        Error error = new Error(exception.getMessage());
+        String body = bodyAsString(error);
+        return new APIGatewayProxyResponseEvent().withBody(body)
+                .withHeaders(getHeaders()).withStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
+
+    private APIGatewayProxyResponseEvent getMessage() {
         Message message = messageProvider.getMessage();
         String body = bodyAsString(message);
         log.info("Got message. message={}", body);
         return new APIGatewayProxyResponseEvent().withBody(body)
-                .withHeaders(getHeaders());
+                .withHeaders(getHeaders()).withStatusCode(HttpStatus.OK.value());
     }
 
     protected String bodyAsString(final Object object) {

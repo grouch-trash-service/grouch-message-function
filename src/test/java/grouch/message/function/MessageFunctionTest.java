@@ -13,10 +13,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.io.IOException;
-
+import grouch.message.model.Error;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -54,6 +55,20 @@ public class MessageFunctionTest {
 
         Message message = actualMessage(apiGatewayProxyResponseEvent);
         assertEquals(expectedMessage, message);
+    }
+
+    @DisplayName("Should return Error message when an error occurs")
+    @Test
+    public void testError() throws IOException {
+        Error expectedError = new Error("An Error occurred");
+        doThrow(new RuntimeException(expectedError.getMessage())).when(messageProvider).getMessage();
+
+        APIGatewayProxyResponseEvent apiGatewayProxyResponseEvent = messageFunction.apply(apiGatewayProxyRequestEvent);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), apiGatewayProxyResponseEvent.getStatusCode());
+        Error error = actualError(apiGatewayProxyResponseEvent);
+
+        assertEquals(expectedError, error);
     }
 
     @DisplayName("Should write body as json string")
@@ -94,5 +109,10 @@ public class MessageFunctionTest {
     private Message actualMessage(APIGatewayProxyResponseEvent apiGatewayProxyResponseEvent) throws IOException {
         String body = apiGatewayProxyResponseEvent.getBody();
         return new ObjectMapper().readValue(body, Message.class);
+    }
+
+    private Error actualError(APIGatewayProxyResponseEvent apiGatewayProxyResponseEvent) throws IOException {
+        String body = apiGatewayProxyResponseEvent.getBody();
+        return new ObjectMapper().readValue(body, Error.class);
     }
 }
