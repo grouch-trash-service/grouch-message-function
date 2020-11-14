@@ -14,8 +14,7 @@ Resources:
       Runtime: java11
       CodeUri: .
       Timeout: 30
-      MemorySize: 512
-      ReservedConcurrentExecutions: 1
+      MemorySize: 1512
       Environment:
         Variables:
           FUNCTION_NAME: MessageFunction
