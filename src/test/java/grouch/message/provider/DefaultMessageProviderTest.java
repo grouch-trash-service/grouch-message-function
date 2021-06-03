@@ -2,16 +2,17 @@ package grouch.message.provider;
 
 import grouch.message.model.Message;
 import grouch.message.model.TrashSchedule;
-import org.junit.Test;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DefaultMessageProviderTest {
+class DefaultMessageProviderTest {
 
     @Test
     @DisplayName("should return a Message")
-    public void testGetMessage() {
+    void testGetMessage() {
         TrashSchedule trashSchedule = new TrashSchedule();
         trashSchedule.setSchedule("Tuesday");
         trashSchedule.setType("default");

@@ -2,16 +2,17 @@ package grouch.message.provider;
 
 import grouch.message.model.HolidayTrashSchedule;
 import grouch.message.model.Message;
-import org.junit.Test;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HolidayMessageProviderTest {
+class HolidayMessageProviderTest {
 
     @Test
     @DisplayName("should return a Message")
-    public void testGetMessage() {
+    void testGetMessage() {
         HolidayTrashSchedule trashSchedule = new HolidayTrashSchedule();
         trashSchedule.setSchedule("Routes are delayed by one day.");
         trashSchedule.setType("holiday");

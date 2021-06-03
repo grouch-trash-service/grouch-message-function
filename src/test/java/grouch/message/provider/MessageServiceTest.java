@@ -1,15 +1,15 @@
 package grouch.message.provider;
 
 import grouch.message.function.TrashFunction;
-import grouch.message.model.TrashFunctionEvent;
 import grouch.message.model.Message;
+import grouch.message.model.TrashFunctionEvent;
 import grouch.message.model.TrashSchedule;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MessageServiceTest {
+@ExtendWith(MockitoExtension.class)
+class MessageServiceTest {
 
     @Mock
     TrashFunction trashFunction;
@@ -28,8 +28,8 @@ public class MessageServiceTest {
     private Message message;
     private TrashSchedule trashSchedule;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         messageService = new MessageService(trashFunction);
         message = new Message("Trash Pickup is on Tuesday...Now Scram!");
 
@@ -40,7 +40,7 @@ public class MessageServiceTest {
 
     @DisplayName("should get messages")
     @Test
-    public void testGetMessage() {
+    void testGetMessage() {
         String date = new SimpleDateFormat(MessageService.DATE_FORMAT).format(new Date());
         TrashFunctionEvent trashFunctionEvent = new TrashFunctionEvent(date);
         doReturn(trashSchedule).when(trashFunction).getTrashSchedule(trashFunctionEvent);

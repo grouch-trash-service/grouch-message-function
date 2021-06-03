@@ -6,12 +6,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import grouch.message.model.Message;
 import grouch.message.provider.MessageProvider;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MessageFunctionTest {
+@ExtendWith(MockitoExtension.class)
+class MessageFunctionTest {
 
     @Mock
     private MessageProvider messageProvider;
@@ -34,15 +37,15 @@ public class MessageFunctionTest {
     private ObjectMapper objectMapper;
     private MessageFunction messageFunction;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         objectMapper = new ObjectMapper();
         messageFunction = new MessageFunction(messageProvider,objectMapper);
     }
 
     @DisplayName("Should return a Response Event with a message")
     @Test
-    public void testReturnResponseEventWithMessage() throws IOException {
+    void testReturnResponseEventWithMessage() throws IOException {
         Message expectedMessage = expectedMessage();
         doReturn(expectedMessage).when(messageProvider).getMessage();
 
@@ -59,7 +62,7 @@ public class MessageFunctionTest {
 
     @DisplayName("Should return Error message when an error occurs")
     @Test
-    public void testError() throws IOException {
+    void testError() throws IOException {
         Error expectedError = new Error("An Error occurred");
         doThrow(new RuntimeException(expectedError.getMessage())).when(messageProvider).getMessage();
 
@@ -73,7 +76,7 @@ public class MessageFunctionTest {
 
     @DisplayName("Should write body as json string")
     @Test
-    public void testWriteBodyAsString() throws IOException {
+    void testWriteBodyAsString() throws IOException {
         Message message = expectedMessage();
         String expectedString = objectMapper.writeValueAsString(message);
 
@@ -84,7 +87,7 @@ public class MessageFunctionTest {
 
     @DisplayName("Should write error when converting to json")
     @Test
-    public void testWriteErrorMessageWhenGettingBodyAsString() throws JsonProcessingException {
+    void testWriteErrorMessageWhenGettingBodyAsString() throws JsonProcessingException {
         Message message = expectedMessage();
         objectMapper = mock(ObjectMapper.class);
 
