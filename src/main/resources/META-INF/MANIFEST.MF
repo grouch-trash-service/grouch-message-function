@@ -4,7 +4,7 @@ Created-By: Maven Jar Plugin 3.2.0
 Build-Jdk-Spec: 11
 Implementation-Title: function-sample-aws
 Implementation-Version: 2.0.0.RELEASE
-Main-Class: org.springframework.boot.loader.wrapper.ThinJarWrapper
+Main-Class: org.springframework.boot.loader.JarLauncher
 Start-Class: grouch.message.Application
-Spring-Boot-Version: 2.4.0-SNAPSHOT
+Spring-Boot-Version: 2.5.0
 Spring-Boot-Classes: 

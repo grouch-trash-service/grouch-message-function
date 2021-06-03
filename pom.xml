@@ -25,6 +25,7 @@
 		<java.version>1.8</java.version>
 		<aws-lambda-events.version>2.0.2</aws-lambda-events.version>
 		<spring-cloud-function.version>3.0.9.RELEASE</spring-cloud-function.version>
+		<spring-native.version>0.10.0-SNAPSHOT</spring-native.version>
 		<cucumber.version>6.10.4</cucumber.version>
 		<sonar.projectKey>grouch-trash-service_grouch-message-function</sonar.projectKey>
 		<sonar.organization>grouch-trash-service</sonar.organization>
@@ -42,6 +43,11 @@
 			<artifactId>spring-cloud-function-adapter-aws</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.experimental</groupId>
+			<artifactId>spring-native</artifactId>
+			<version>${spring-native.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-lambda-java-events</artifactId>
 			<version>${aws-lambda-events.version}</version>
@@ -50,13 +56,13 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-lambda-java-core</artifactId>
-			<version>1.1.0</version>
+			<version>1.2.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
-			<version>1.11.859</version>
+			<version>1.11.1031</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -134,6 +140,34 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<builder>paketobuildpacks/builder:tiny</builder>
+						<env>
+							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+							<BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-J-Xmx10g</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+						</env>
+					</image>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.experimental</groupId>
+				<artifactId>spring-aot-maven-plugin</artifactId>
+				<version>${spring-native.version}</version>
+				<executions>
+					<execution>
+						<id>test-generate</id>
+						<goals>
+							<goal>test-generate</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -268,5 +302,21 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<!--TODO: remove when native-image has a release -->
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>

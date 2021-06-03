@@ -7,7 +7,7 @@ import grouch.message.function.TrashFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class LambdaConfig {
     @Bean
     public AWSLambda awsLambda() {
@@ -15,10 +15,10 @@ public class LambdaConfig {
     }
 
     @Bean
-    TrashFunction messageLambdaFunction() {
+    TrashFunction messageLambdaFunction(final AWSLambda awsLambda) {
         return LambdaInvokerFactory
                 .builder()
-                .lambdaClient(awsLambda())
+                .lambdaClient(awsLambda)
                 .build(TrashFunction.class);
     }
 }

@@ -8,10 +8,14 @@ Description: >
 Resources:
   GrouchMessageFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      DockerTag: java11-maven-v1
+      DockerContext: .
+      Dockerfile: Dockerfile
     Properties:
       FunctionName: GrouchMessageFunction
       Handler: grouch.message.function.FunctionHandler
-      Runtime: java11
+      PackageType: Image
       CodeUri: .
       Timeout: 30
       MemorySize: 1512
