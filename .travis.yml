@@ -1,4 +1,13 @@
 language: java
-script: mvn clean spring-boot:build-image
+script:
+  - mvn clean spring-boot:build-image
+  - sam build
+  - sam local start-lambda &; sam_pid=$!; sleep 10
+  - ./mvnw -P cucumber verify
+  - kill $sam_pid
 vm:
   size: [large]
+
+install:
+  - pip install awscli
+  - pip install aws-sam-cli
